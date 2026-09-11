@@ -133,18 +133,18 @@ export function canWorkDischargeChecklist(role: PrincipalRole | undefined): bool
 /**
  * Which box this role may tick, mirroring DischargeService.TickedBy.
  *
- * `billing_settled` is nobody's: settling the bill writes it and the checklist endpoint
- * refuses the key outright, so the screen renders it as a state and never as a control.
+ * Which comes to one box and one role. `billing_settled` is nobody's — settling the bill
+ * writes it and the checklist endpoint refuses the key outright, so the screen renders it as a
+ * state and never as a control. Anything else is not a box this build has.
+ *
+ * Written as a lookup rather than `role === 'doctor'` so that adding a third item is an entry
+ * here, and an unknown key is false rather than accidentally the ward nurse's.
  */
 export function canTickChecklistItem(
   role: PrincipalRole | undefined,
   item: string,
 ): boolean {
-  if (item === 'billing_settled') {
-    return false;
-  }
-
-  return item === 'clinical_clearance' ? role === 'doctor' : role === 'ward_nurse';
+  return item === 'clinical_clearance' && role === 'doctor';
 }
 
 /**

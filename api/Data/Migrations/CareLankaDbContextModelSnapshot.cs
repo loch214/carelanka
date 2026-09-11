@@ -1119,7 +1119,7 @@ namespace CareLanka.Api.Data.Migrations
                         {
                             t.HasCheckConstraint("ck_bed_assignments_assigned_by", "assigned_by IN ('agent', 'user')");
 
-                            t.HasCheckConstraint("ck_bed_assignments_release_reason", "release_reason IS NULL OR release_reason IN ('discharged', 'hold_expired', 'cancelled', 'transferred', 'rejected')");
+                            t.HasCheckConstraint("ck_bed_assignments_release_reason", "release_reason IS NULL OR release_reason IN ('discharged', 'hold_expired', 'cancelled', 'transferred', 'rejected', 'corrected')");
 
                             t.HasCheckConstraint("ck_bed_assignments_status", "status IN ('reserved', 'occupied', 'released')");
                         });
@@ -1355,7 +1355,7 @@ namespace CareLanka.Api.Data.Migrations
 
                     b.ToTable("discharge_checklist_items", null, t =>
                         {
-                            t.HasCheckConstraint("ck_discharge_checklist_items_item_type", "item_type IN ('clinical_clearance', 'medication_issued', 'billing_settled', 'follow_up_recorded', 'transport_arranged')");
+                            t.HasCheckConstraint("ck_discharge_checklist_items_item_type", "item_type IN ('clinical_clearance', 'billing_settled')");
                         });
                 });
 
