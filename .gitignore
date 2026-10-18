@@ -57,3 +57,6 @@ AssignmentDocs/QM Project.docx
 AssignmentDocs/QM Handoff.md
 AssignmentDocs/images/
 compose.qm.yaml
+
+# Local-only backups (Azure exports from the old hosting)
+.local/
