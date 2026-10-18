@@ -398,4 +398,4 @@ only ever talks to one address. `render.yaml` and `web-ui/vercel.json` hold thos
 Group project for **SE3090 Software Engineering Frameworks**, Year 3 Semester 1, 2026.
 **Assignment 1: Integrated Full-Stack and Agentic AI Application Development.**
 
-Built by **Nasrulla Unais** (Emergency), **Kaveesha** (Staff), **Sethmin** (Equipment) and **Lochana** (Patient).
+Built by **[Nasrulla Unais](https://github.com/Nasrullaunais)** (Emergency), **[Kaveesha](https://github.com/KaveeshaRajapaksha77)** (Staff), **[Sethmin](https://github.com/IT24100161)** (Equipment) and **[Lochana](https://github.com/loch214)** (Patient).
