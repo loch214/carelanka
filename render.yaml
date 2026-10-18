@@ -1,0 +1,35 @@
+# Render Blueprint for the API. The React app is hosted on Vercel and the database on Neon.
+# Values marked sync: false are secrets: Render asks for them once, when the Blueprint is created,
+# and they live only in the Render dashboard after that.
+services:
+  - type: web
+    name: carelanka-api
+    runtime: docker
+    plan: free
+    region: singapore
+    branch: main
+    dockerfilePath: ./Dockerfile.api
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeployTrigger: checksPass
+    buildFilter:
+      paths:
+        - api/**
+        - Dockerfile.api
+        - .dockerignore
+        - .config/**
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ASPNETCORE_FORWARDEDHEADERS_ENABLED
+        value: "true"
+      - key: PORT
+        value: "5231"
+      - key: Swagger__Enabled
+        value: "true"
+      - key: ConnectionStrings__CareLanka
+        sync: false
+      - key: Jwt__SigningKey
+        sync: false
+      - key: LanguageModel__ApiKey
+        sync: false

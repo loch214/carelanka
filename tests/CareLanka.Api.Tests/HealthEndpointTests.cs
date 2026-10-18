@@ -26,7 +26,19 @@ public sealed class HealthEndpointTests
         Assert.Equal("up", body?.Database);
     }
 
-    private sealed class TestApplication : WebApplicationFactory<Program>
+    [Fact]
+    public async Task Liveness_endpoint_answers_without_checking_the_database()
+    {
+        using var environment = TestEnvironment.Use();
+        await using var application = new TestApplication(new UnreachableHealthService());
+        using var client = application.CreateClient();
+
+        var response = await client.GetAsync("/health");
+
+        Assert.Equal(200, (int)response.StatusCode);
+    }
+
+    private sealed class TestApplication(IHealthService? health = null) : WebApplicationFactory<Program>
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -34,9 +46,15 @@ public sealed class HealthEndpointTests
             builder.ConfigureServices(services =>
             {
                 services.RemoveAll<IHealthService>();
-                services.AddSingleton<IHealthService>(new StubHealthService());
+                services.AddSingleton(health ?? new StubHealthService());
             });
         }
+    }
+
+    private sealed class UnreachableHealthService : IHealthService
+    {
+        public Task<HealthStatus> GetHealthAsync(CancellationToken cancellationToken = default)
+            => throw new InvalidOperationException("The liveness endpoint must not check the database.");
     }
 
     private sealed class StubHealthService : IHealthService

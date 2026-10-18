@@ -632,6 +632,9 @@ app.UseCors(WebUiCors);
 app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
+// Liveness only, for the host's health check and uptime monitors: it must answer while the database
+// is asleep or unreachable, which /api/health deliberately does not.
+app.MapGet("/health", () => Results.Ok(new { status = "ok" })).ExcludeFromDescription();
 app.MapControllers();
 app.MapHub<NotificationsHub>(NotificationsHubPath);
 
