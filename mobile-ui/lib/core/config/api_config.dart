@@ -6,7 +6,7 @@ class ApiConfig {
 
   static const _override = String.fromEnvironment('API_BASE_URL');
 
-  static const _hosted = 'https://carelanka.uaenorth.cloudapp.azure.com/api';
+  static const _hosted = 'https://carelanka-api.onrender.com/api';
 
   static const _port = 5231;
 
