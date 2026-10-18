@@ -5,6 +5,7 @@
 <p align="center">
   <a href="https://github.com/loch214/carelanka/actions/workflows/ci.yml"><img src="https://github.com/loch214/carelanka/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
   <img src="https://img.shields.io/website?url=https%3A%2F%2Fcarelanka.vercel.app%2F&up_message=online&down_message=offline&label=live%20site" alt="Live site status">
+  <a href="https://github.com/loch214/carelanka/releases/latest"><img src="https://img.shields.io/github/v/release/loch214/carelanka?label=phone%20app" alt="Latest phone app release"></a>
   <br>
   <img src="https://img.shields.io/badge/.NET-8-512BD4?logo=dotnet&logoColor=white" alt=".NET 8">
   <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black" alt="React 19">
@@ -16,7 +17,7 @@
 <p align="center">
   <a href="https://carelanka.vercel.app"><b>🌐 Live site</b></a> &nbsp;·&nbsp;
   <a href="https://carelanka-api.onrender.com/swagger"><b>📖 Server docs</b></a> &nbsp;·&nbsp;
-  <a href="mobile-ui/README.md#building-a-release-apk"><b>📱 Phone app</b></a> &nbsp;·&nbsp;
+  <a href="https://github.com/loch214/carelanka/releases/latest"><b>📱 Phone app</b></a> &nbsp;·&nbsp;
   <a href="#-try-it-in-two-minutes"><b>🔑 Test logins</b></a> &nbsp;·&nbsp;
   <a href="#-run-it-on-your-computer"><b>💻 Run it yourself</b></a>
 </p>
@@ -208,7 +209,7 @@ about 15 quiet minutes waits around a minute while it wakes up. After that it is
 The demo data there gives every role the passwords written in [`docs/seed/`](docs/seed), and the
 step-by-step script is in [`docs/demo/emergency.md`](docs/demo/emergency.md).
 
-**Get the phone app:** build the `.apk` as described in [`mobile-ui/README.md`](mobile-ui/README.md#building-a-release-apk). A release build talks to the live server by itself.
+**Get the phone app:** download the `.apk` from the [latest release](https://github.com/loch214/carelanka/releases/latest) and open it on an Android phone. Allow installs from unknown sources when asked. If you have version 1.0.0 or 1.0.1 installed, uninstall it first: 1.0.2 is signed with a new key.
 
 ---
 
