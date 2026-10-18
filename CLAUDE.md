@@ -502,8 +502,10 @@ component and add yours at the end of your group.
 `flutter test`; and the contract job — spec checks, a migration for every model change,
 and both generated clients regenerated against the running API with zero drift.
 
-Only when all four pass: four images to `ghcr.io`, then (on `main` only) deploy to the
-Azure server over SSH and check `/api/health`. `deploy/README.md` is the server setup.
+When all four pass, CI also test-builds the API image from `Dockerfile.api`; it publishes
+nothing. Deploys are not in CI: Render deploys the API once the checks on `main` pass, and Vercel
+deploys `web-ui/` on every push to `main`. *(Since 2026-10-18. The Azure server, GHCR images and
+SSH deploy are gone; `deploy/README.md` records how that setup worked.)*
 
 **A red check blocks the deploy.** Fix the cause; don't loosen the check.
 

@@ -186,6 +186,10 @@ A release build talks to the hosted server on its own; no `API_BASE_URL` flag is
    signed with a different one, so the key holder keeps the keystore and its passwords
    backed up. Without `key.properties` the build falls back to the debug key, which is fine
    for trying a release build but not for handing out.
+
+   Releases from `1.0.2+3` on are signed with a **new** key, kept outside git in the key
+   holder's `.local/android/`. The earlier `1.0.x` APKs used a different key, so a phone that
+   has one of those installed must uninstall it before installing a newer APK.
 3. Build: `flutter build apk --release`. The APK lands in
    `build/app/outputs/flutter-apk/app-release.apk`.
 

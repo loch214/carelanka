@@ -431,6 +431,24 @@ only when every check passes, and deploys over SSH on `main` only, then checks
 - **The phone app is not hosted.** The APK is built with
   `--dart-define=API_BASE_URL=https://<address>/api` and talks to the same server.
 
+### Superseded (2026-10-18)
+
+After grading, the Azure virtual machine and its database were deleted, and the project moved
+to free plans: the React app on Vercel, the API on Render (built from `Dockerfile.api`), the
+database on Neon. The decision above stays as the record of what was graded.
+
+What changed, and why it is acceptable now:
+
+- **Vercel passes `/api` on to Render** (`web-ui/vercel.json`), so the browser still talks to one
+  address, as it did with Caddy. WebSockets do not pass through, so live updates fall back to
+  Server-Sent Events by themselves.
+- **The API sleeps after 15 idle minutes** on Render's free plan and takes about a minute to
+  wake. The demo-day reason for a server that never sleeps no longer applies.
+- **Neon manages the database.** The API still logs in as the limited `carelanka_app`;
+  migrations run with the owner login from a developer's machine.
+- **CI no longer publishes images or deploys over SSH.** Render deploys the API itself after the
+  checks pass, and Vercel deploys the website on every push to `main`.
+
 
 ---
 

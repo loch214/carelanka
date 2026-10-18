@@ -1,5 +1,16 @@
 # Hosting CareLanka on Azure
 
+> **History, not the live setup.** This is how the graded version ran, on one Azure virtual
+> machine, from September to October 2026. After grading, that server and its database were
+> deleted. Since 18 October 2026 the project runs on free plans: the website on Vercel, the API
+> on Render, the database on Neon (see "Hosting history" in the main `README.md`). CI no longer
+> publishes images or deploys over SSH.
+>
+> The files here are kept so the Azure setup can be rebuilt. `db-setup/` is still in use: the
+> local `compose.yaml` builds from it, and its scripts created the API's database login and demo
+> data on Neon. Neon rejects the word `NOSUPERUSER` in `app-role.sql`, so run it there without
+> that word.
+
 One small server runs everything: the database, the API, and the web app.
 Caddy sits in front, gets a free `https://` certificate, and sends `/api` and
 `/swagger` to the API and everything else to the web app.

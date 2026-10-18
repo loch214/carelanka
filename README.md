@@ -3,9 +3,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Nasrullaunais/carelanka/actions/workflows/ci.yml"><img src="https://github.com/Nasrullaunais/carelanka/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
-  <img src="https://img.shields.io/website?url=https%3A%2F%2Fcarelanka.uaenorth.cloudapp.azure.com%2F&up_message=online&down_message=offline&label=live%20site" alt="Live site status">
-  <a href="https://github.com/Nasrullaunais/carelanka/releases/latest"><img src="https://img.shields.io/github/v/release/Nasrullaunais/carelanka?label=phone%20app" alt="Latest phone app release"></a>
+  <a href="https://github.com/loch214/carelanka/actions/workflows/ci.yml"><img src="https://github.com/loch214/carelanka/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
+  <img src="https://img.shields.io/website?url=https%3A%2F%2Fcarelanka.vercel.app%2F&up_message=online&down_message=offline&label=live%20site" alt="Live site status">
   <br>
   <img src="https://img.shields.io/badge/.NET-8-512BD4?logo=dotnet&logoColor=white" alt=".NET 8">
   <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black" alt="React 19">
@@ -15,9 +14,9 @@
 </p>
 
 <p align="center">
-  <a href="https://carelanka.uaenorth.cloudapp.azure.com"><b>🌐 Live site</b></a> &nbsp;·&nbsp;
-  <a href="https://carelanka.uaenorth.cloudapp.azure.com/swagger"><b>📖 Server docs</b></a> &nbsp;·&nbsp;
-  <a href="https://github.com/Nasrullaunais/carelanka/releases/latest"><b>📱 Phone app</b></a> &nbsp;·&nbsp;
+  <a href="https://carelanka.vercel.app"><b>🌐 Live site</b></a> &nbsp;·&nbsp;
+  <a href="https://carelanka-api.onrender.com/swagger"><b>📖 Server docs</b></a> &nbsp;·&nbsp;
+  <a href="mobile-ui/README.md#building-a-release-apk"><b>📱 Phone app</b></a> &nbsp;·&nbsp;
   <a href="#-try-it-in-two-minutes"><b>🔑 Test logins</b></a> &nbsp;·&nbsp;
   <a href="#-run-it-on-your-computer"><b>💻 Run it yourself</b></a>
 </p>
@@ -162,8 +161,8 @@ In plain words:
 | Live updates | SignalR | Tells the website something changed, so it refreshes by itself |
 | AI | Google Gemini free tier, plus our own step-by-step loop in C# | Ranks options and writes drafts. Never has the last word |
 | Maps | OpenStreetMap, OSRM | Address search, map pictures, road travel times |
-| Phone messages | Firebase | Lock-screen messages |
-| Hosting | Azure virtual machine, Docker Compose, Caddy | Runs everything |
+| Phone messages | Firebase | Lock-screen messages. Switched off on the free hosting |
+| Hosting | Vercel (website), Render (server, in Docker), Neon (database) | Free plans. Started on an Azure virtual machine, see [Hosting history](#-hosting-history) |
 | Checks | GitHub Actions | Builds and tests every change, then deploys when all pass |
 
 Why we wrote our own AI loop instead of using a ready-made framework is in [`docs/ADR.md`](docs/ADR.md), decision 1.
@@ -193,32 +192,23 @@ And one helper's whole trip, from a patient's phone to a nurse's screen and back
 
 ## 🔑 Try it in two minutes
 
-**The live site is at <https://carelanka.uaenorth.cloudapp.azure.com>.** It is filled with demo data.
+**The live site is at <https://carelanka.vercel.app>.** It is filled with demo data.
 
-| Sign in as | Where | Email or username | Password | Try this |
+| Sign in as | Where | Email | Password | Try this |
 | :--- | :---: | :--- | :--- | :--- |
-| Duty manager | 🖥️ | `duty.rajapaksa@carelanka.lk` | `CareLanka#2026` | Confirm an ambulance |
-| Ward nurse | 🖥️ | `nurse.perera@carelanka.lk` | `CareLanka#2026` | Admit a patient, assign a bed |
-| Doctor | 🖥️ | `dr.silva@carelanka.lk` | `CareLanka#2026` | Give a clinical clearance |
-| Hospital administrator | 🖥️ | `admin.wickrama@carelanka.lk` | `CareLanka#2026` | Staff, prices, leave |
-| Equipment manager | 🖥️ | `equip.bandara@carelanka.lk` | `CareLanka#2026` | Pharmacy, warnings, lab |
-| Ambulance crew | 📱 | `crew.fernando@carelanka.lk` | `CareLanka#2026` | Open **My run** |
-| Patient | 📱 | `demo.emergency` | `Patient#2026` | Report an emergency |
+| Reception | 🖥️ | `staff.jayasuriya@carelanka.lk` | `CareLanka#2026` | Register and admit a patient, assign a bed, raise a bill |
 
-The full list, with what each role can and cannot do, is in [`TEST_ACCOUNTS.md`](TEST_ACCOUNTS.md).
-These are demo passwords on demo data.
+That is the one public login. The other roles have private passwords on the live site.
+What reception can and cannot do is in [`TEST_ACCOUNTS.md`](TEST_ACCOUNTS.md).
 
-**The best demo is the whole ambulance story, with four logins:**
+**The live server sleeps when nobody uses it.** It runs on a free plan, so the first visit after
+about 15 quiet minutes waits around a minute while it wakes up. After that it is quick.
 
-1. 📱 As **`crew.fernando`**, open **My run** and allow location. This tells the system where the ambulance is.
-2. 📱 As **`demo.emergency`**, press **Request ambulance**.
-3. 🖥️ As the **duty manager**, open that call on the emergency board. Send the ambulance yourself, or press **Ask agent** and confirm what the AI suggests.
-4. 📱 As **`crew.fernando`** again, accept the run, move it along, and finish with the handover.
-5. 🖥️ As the **ward nurse**, find the patient waiting for a bed and assign one.
+**To try every role**, including the whole ambulance story, run it on your computer (below).
+The demo data there gives every role the passwords written in [`docs/seed/`](docs/seed), and the
+step-by-step script is in [`docs/demo/emergency.md`](docs/demo/emergency.md).
 
-The full step-by-step script is in [`docs/demo/emergency.md`](docs/demo/emergency.md).
-
-**Get the phone app:** download the `.apk` from the [latest release](https://github.com/Nasrullaunais/carelanka/releases/latest) and open it on an Android phone. Allow installs from unknown sources when asked.
+**Get the phone app:** build the `.apk` as described in [`mobile-ui/README.md`](mobile-ui/README.md#building-a-release-apk). A release build talks to the live server by itself.
 
 ---
 
@@ -261,7 +251,7 @@ flutter run -d YOUR_DEVICE_ID --dart-define=API_BASE_URL=http://127.0.0.1:5231/a
 ```
 
 `adb reverse` lets the phone reach the server on your computer. Run it again every time you reconnect the phone.
-To point the phone app at the live site instead, use `--dart-define=API_BASE_URL=https://carelanka.uaenorth.cloudapp.azure.com/api`.
+To point the phone app at the live site instead, use `--dart-define=API_BASE_URL=https://carelanka-api.onrender.com/api`.
 
 More detail, and fixes for common problems, are in [`LOCAL_SETUP.md`](LOCAL_SETUP.md).
 
@@ -311,7 +301,7 @@ carelanka/
 ├── tests/             Server tests
 ├── specs/             Each part's design plan and written list of server actions
 ├── docs/              Decisions, build plan, table diagram, demo data, demo scripts
-├── deploy/            Hosting on Azure: Compose file, Caddy, setup guide
+├── deploy/            The first hosting, on an Azure server (kept for reference); db-setup/ is still used
 ├── scripts/           Checks that CI runs
 └── compose.yaml       Starts the server and database on your computer
 ```
@@ -346,20 +336,31 @@ flowchart LR
     C2 --> G
     C3 --> G
     C4 --> G
-    G -- Yes --> I["Build the<br/>4 images"]
+    G -- Yes --> I["Build the<br/>server image"]
     I --> M{"Push<br/>to main?"}
-    M -- Yes --> PB["Publish the<br/>images"]
-    PB --> D["Deploy to Azure<br/>over SSH"]
-    D --> H(["Check /api/health"])
-    M -- No --> S(["Stop: a pull request<br/>never publishes<br/>or deploys"])
+    M -- Yes --> R["Render builds and<br/>deploys the server"]
+    M -- Yes --> V["Vercel builds and<br/>deploys the website"]
+    M -- No --> S(["Stop: a pull request<br/>never deploys"])
 
     classDef check fill:#E6F0FA,stroke:#2271B3,color:#1F2937
     classDef ship fill:#E7F5EC,stroke:#2E8B57,color:#1F2937
     class C1,C2,C3,C4 check
-    class I,PB,D,H ship
+    class I,R,V ship
 ```
 
-Merge to `main` and the live site updates by itself. The server setup is in [`deploy/README.md`](deploy/README.md).
+Merge to `main` and the live site updates by itself. Render waits for the checks to pass and only
+rebuilds when server files changed. Vercel rebuilds the website on every push to `main`.
+
+### 🏠 Hosting history
+
+| When | Where | What happened |
+| :--- | :--- | :--- |
+| Sep to Oct 2026 | One Azure virtual machine (Azure for Students), Docker Compose and Caddy | The graded version. Set up as in [`deploy/README.md`](deploy/README.md) |
+| Oct 2026 | — | The project was graded and the Azure server and its database were deleted |
+| From 18 Oct 2026 | Vercel, Render and Neon, all free plans | Moved to `loch214/carelanka` with full history, a fresh database and new passwords |
+
+The website on Vercel passes every `/api` request on to the server on Render, so the browser
+only ever talks to one address. `render.yaml` and `web-ui/vercel.json` hold those settings.
 
 ---
 
@@ -369,7 +370,7 @@ Merge to `main` and the live site updates by itself. The server setup is in [`de
 - **Run one copy of the server.** Live updates keep their list of connected browsers in memory, so two copies would not share it. See [`docs/ADR.md`](docs/ADR.md), decision 9.
 - **Phone messages show real text on a locked screen.** That is easy to read for anyone nearby. Setting `Notifications:LockScreenDetail` to `Generic` swaps it for a general sentence.
 - **Not built yet:** email and text-message alerts, browser push, iPhone push messages.
-- **Demo passwords are public.** Change every one before pointing this at anything real.
+- **Only the reception demo password is public on the live site.** A local copy seeded from `docs/seed/` uses the shared demo passwords for every role, so change them before pointing it at anything real.
 
 ---
 
@@ -383,10 +384,10 @@ Merge to `main` and the live site updates by itself. The server setup is in [`de
 | [`docs/entity_diagram.md`](docs/entity_diagram.md) | Every table and field |
 | [`specs/integration_of_functions.md`](specs/integration_of_functions.md) | Who owns which table, and who may call whom |
 | [`specs/ai-orchestration-workflow.md`](specs/ai-orchestration-workflow.md) | How the AI helpers chain together |
-| [`TEST_ACCOUNTS.md`](TEST_ACCOUNTS.md) | Every demo login and what it can do |
+| [`TEST_ACCOUNTS.md`](TEST_ACCOUNTS.md) | The public demo login and what it can do |
 | [`STUBS.md`](STUBS.md) | Every fake standing in for unbuilt work |
 | [`CONTEXT.md`](CONTEXT.md) | The hospital words we use, so everyone means the same thing |
-| [`deploy/README.md`](deploy/README.md) | Setting up the Azure server |
+| [`deploy/README.md`](deploy/README.md) | How the first version was hosted on an Azure server |
 | [`LOCAL_SETUP.md`](LOCAL_SETUP.md) | Running everything on your computer |
 
 ---
