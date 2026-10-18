@@ -1,6 +1,7 @@
 # Render Blueprint for the API. The React app is hosted on Vercel and the database on Neon.
-# Values marked sync: false are secrets: Render asks for them once, when the Blueprint is created,
-# and they live only in the Render dashboard after that.
+# The live service (carelanka-api) was created with these settings through Render's API, not by
+# syncing this file, so editing it changes nothing until it is applied with New > Blueprint.
+# Values marked sync: false are secrets and live only in the Render dashboard.
 services:
   - type: web
     name: carelanka-api
@@ -27,6 +28,12 @@ services:
         value: "5231"
       - key: Swagger__Enabled
         value: "true"
+      # Both indexes are set because environment variables override appsettings.json's array
+      # item by item; setting only __0 would leave a localhost origin allowed in production.
+      - key: Cors__AllowedOrigins__0
+        value: https://carelanka.vercel.app
+      - key: Cors__AllowedOrigins__1
+        value: https://carelanka.vercel.app
       - key: ConnectionStrings__CareLanka
         sync: false
       - key: Jwt__SigningKey
